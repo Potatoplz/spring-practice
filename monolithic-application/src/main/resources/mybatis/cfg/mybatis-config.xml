@@ -7,10 +7,11 @@
         <setting name="useGeneratedKeys" value="true" />
         <setting name="defaultExecutorType" value="REUSE" />
         <setting name="aggressiveLazyLoading" value="false" />
+        <setting name="jdbcTypeForNull" value="NULL" />
     </settings>
     
     <!-- mapper.xml에서 resultType을 alias로 쓰기 위해 설정-->
-   	<typeAliases>
+    <typeAliases>
 		<typeAlias type="com.potato.mono.user.model.UserVO" alias="UserVO"/>
 	</typeAliases>
 

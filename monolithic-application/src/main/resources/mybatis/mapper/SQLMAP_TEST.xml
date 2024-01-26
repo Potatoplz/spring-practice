@@ -3,7 +3,7 @@
 
 <mapper namespace="TestMapper">
 
-    <select id="findAll" resultType="com.potato.mono.test.Test">
+    <select id="findAll" resultType="com.potato.mono.test.TestVO">
         SELECT * FROM JGY.JGY_TEST
     </select>
 

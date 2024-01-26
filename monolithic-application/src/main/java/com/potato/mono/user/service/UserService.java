@@ -31,7 +31,6 @@ public class UserService {
     
     // 사용자 등록
     public UserVO createUser(UserVO userVO) {
-    	// ID 중복체크
         UserVO existingUser = userRepository.selectByUserId(userVO.getUserId());
         if (existingUser != null) {
             // 중복된 ID가 존재하는 경우
@@ -39,10 +38,11 @@ public class UserService {
             return null;
         }
 
-        String generatedKeyId = UUID.randomUUID().toString().replace("-", "").substring(0, 20);
-        userVO.setKeyId(generatedKeyId);
-        userRepository.createUser(userVO);
-        return userVO;
+        int result = userRepository.createUser(userVO);
+        if (result > 0) {
+            return userVO; // 성공적으로 생성된 경우
+        }
+        return null; // 삽입 실패시
     }
     
     // 사용자 비활성화

@@ -1,0 +1,12 @@
+### STS ###
+.project
+.metadata
+
+### IntelliJ IDEA ###
+.idea
+
+### VS Code ###
+.vscode/
+
+### MAC ###
+.DS_Store
