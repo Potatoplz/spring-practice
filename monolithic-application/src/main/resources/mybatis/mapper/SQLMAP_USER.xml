@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMapper">
+	
+	<!-- 사용자 조회 결과 맵 -->
+	<resultMap type="UserVO" id="RM_USER">
+		<result property="keyId" column="KEY_ID"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="userName" column="USER_NM"/>
+		<result property="userPw" column="USER_PW"/>
+		<result property="userSts" column="USER_STS"/>
+	</resultMap>
+	
+	<!-- 사용자 목록 전체조회 -->
+	<select id="selectAll" resultMap="RM_USER">
+        SELECT * FROM YW_USER
+    </select>
+    
+    <!-- 사용자 목록 검색조회 -->
+	<select id="selectByCondition" parameterType="map" resultMap="RM_USER">
+	    SELECT * FROM YW_USER
+	    <where>
+	        <if test="userId != null">
+	            USER_ID LIKE '%' ||  #{userId} || '%'
+	        </if>
+	        <if test="userName != null">
+	            <choose>
+	                <when test="userId != null"> AND </when>
+	                <otherwise></otherwise>
+	            </choose>
+	            USER_NM LIKE '%' ||  #{userName} || '%'
+	        </if>
+	        <if test="userSts != null">
+	            <choose>
+	                <when test="userId != null or userName != null"> AND </when>
+	                <otherwise></otherwise>
+	            </choose>
+	            USER_STS = #{userSts}
+	        </if>
+	    </where>
+	</select>
+
+    
+    <!-- 사용자 등록 -->
+    <insert id="insertUser" parameterType="UserVO">
+        INSERT INTO YW_USER (
+	        KEY_ID, 
+	        USER_ID, 
+	        USER_NM, 
+	        USER_PW, 
+	        USER_STS
+        ) VALUES (
+        	#{keyId}
+	        , #{userId}
+	        , #{userName}
+	        , #{userPw}
+	        , #{userSts}
+        )
+    </insert>
+    
+    <!-- 사용자 비활성화 -->
+    <update id="deactivateUser" parameterType="map">
+        UPDATE YW_USER
+        SET USER_STS = 'D'
+        WHERE USER_ID = #{userId}
+        AND USER_PW = #{userPw}
+    </update>
+
+</mapper>

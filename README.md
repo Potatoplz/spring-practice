@@ -1,1 +1,1 @@
-# Spring Practice
+# Spring boot + MyBatis base project

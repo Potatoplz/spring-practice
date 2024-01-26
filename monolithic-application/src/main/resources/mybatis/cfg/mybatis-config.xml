@@ -1,0 +1,17 @@
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <setting name="cacheEnabled" value="false" />
+        <setting name="useGeneratedKeys" value="true" />
+        <setting name="defaultExecutorType" value="REUSE" />
+        <setting name="aggressiveLazyLoading" value="false" />
+    </settings>
+    
+    <!-- mapper.xml에서 resultType을 alias로 쓰기 위해 설정-->
+   	<typeAliases>
+		<typeAlias type="com.potato.mono.user.model.UserVO" alias="UserVO"/>
+	</typeAliases>
+
+</configuration>
